@@ -239,6 +239,59 @@ def main(page: ft.Page):
 
         ]
     )# fin section mes bookins
+    # page profile
+    # Carte de profil
+    profile_card = ft.Container(
+        content=ft.Column(
+            [
+                # Image de couverture
+                ft.Container(
+                    height=100,
+                    bgcolor=ft.Colors.BLUE_ACCENT_700,
+                    border_radius=ft.border_radius.only(top_left=15, top_right=15),
+                    margin=ft.margin.only(bottom=-50),
+                ),
+                # Photo de profil (Avatar)
+                ft.Container(
+                    content=ft.CircleAvatar(
+                        # imag=ft.DecorationImage(src="covers/{img_id}.jpg", fit=ft.ImageFit.COVER),
+                        radius=50,
+                    ),
+                    border=ft.border.all(4, ft.Colors.WHITE),
+                    shape=ft.BoxShape.CIRCLE,
+                ),
+                # Infos textuelles
+                ft.Text("Ddju27nette", size=25, weight="bold", color="white"),
+                ft.Text("Lecteur anonyme", color="grey"),
+                
+                ft.Row(
+                    [
+                        ft.Icon(ft.Icons.LOCATION_ON, size=16, color="grey"),
+                        ft.Text("Cameroun", color="grey"),
+                    ],
+                    alignment=ft.MainAxisAlignment.CENTER,
+                ),
+                
+                # Bouton Suivre
+                ft.Container(height=10),
+                ft.ElevatedButton(
+                    "Modifier le profil",
+                    style=ft.ButtonStyle(
+                        color="white",
+                        bgcolor=ft.Colors.BLUE_700,
+                        shape=ft.RoundedRectangleBorder(radius=8),
+                    ),
+                    width=200,
+                ),
+                ft.Container(height=10),
+            ],
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        ),
+        bgcolor="#23262d",
+        width=300,
+        border_radius=15,
+        padding=0, # On gère le padding interne via les Containers internes
+    )
     
     # zone de contenu principale qui changera selon la selection dans la barre laterale
     content_area = ft.Container(content=main_content, expand=True, padding=20)
@@ -248,11 +301,7 @@ def main(page: ft.Page):
         elif index == 1:
             content_area.content = main_bookins
         elif index == 2:
-            content_area.content = ft.Column([
-                ft.Text("Mon Profil", size=30, weight="bold"),
-                ft.CircleAvatar(content=ft.Icon(ft.Icons.PERSON), radius=50),
-                ft.Text("Utilisateur : Ddjunet", size=20)
-            ])
+            content_area.content = profile_card
         elif index == 3:
             content_area.content = ft.Text("Paramètres de l'application", size=30)
         
